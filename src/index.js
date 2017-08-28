@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      markedStr: ''
+      markedStr: 'Heading\n=======\n\nSub-heading\n-----------\n \n### Another deeper heading\n \nParagraphs are separated\nby a blank line.\n\nLeave 2 spaces at the end of a line to do a  \nline break\n\nText attributes *italic*, **bold**, \n`monospace`, ~~strikethrough~~ .\n\nShopping list:\n\n  * apples\n  * oranges\n  * pears\n\nNumbered list:\n\n  1. apples\n  2. oranges\n  3. pears\n\nThe rain---not the reign---in\nSpain.\n\n *[Herman Fassett](https://freecodecamp.com/hermanfassett)*'
     }
     this.update = this.update.bind(this)
   }
@@ -32,11 +32,11 @@ class App extends React.Component {
 class TextBox extends React.Component {
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 text-center">
+      <div className="col-xs-12 col-sm-6">
         <div className="form-group">
           <label>Type Markdown here:</label>
           <br></br>
-          <textarea className="form-control" rows="10" cols="40" id="code" onChange={(e)=>{
+          <textarea className="form-control" rows="33" cols="40" id="code" onChange={(e)=>{
             this.props.update(e.target.value)
           }} value={this.props.value}></textarea>
         </div>
@@ -48,9 +48,12 @@ class TextBox extends React.Component {
 class MarkdownBox extends React.Component {
   render(){
   return (
-    <div className="col-xs-12 col-sm-6">
+    <div id="preview" className="col-xs-12 col-sm-6">
+    <div className="form-group">
+      <label className="">View Markdown Here:</label>
       <div key={new Date().getTime()} dangerouslySetInnerHTML={{__html: marked(this.props.output)}} />
     </div>
+  </div>
   )
 }
 }
