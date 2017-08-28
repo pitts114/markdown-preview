@@ -12,8 +12,9 @@ class App extends React.Component {
     this.update = this.update.bind(this)
   }
   update(str) {
-    //parse markedown here
+    //parse markdown here
     this.setState({markedStr: str})
+    console.log(str)
   }
 
   render() {
@@ -21,7 +22,7 @@ class App extends React.Component {
       <div className="container">
         <div className="row">
           <TextBox value={this.state.markedStr} update={this.update} />
-          <MarkdownBox/>
+          <MarkdownBox output={this.state.markedStr}/>
         </div>
       </div>
     )
@@ -36,7 +37,6 @@ class TextBox extends React.Component {
           <label>Type Markdown here:</label>
           <br></br>
           <textarea className="form-control" rows="10" cols="40" id="code" onChange={(e)=>{
-            console.log(e.target.value)
             this.props.update(e.target.value)
           }} value={this.props.value}></textarea>
         </div>
@@ -45,12 +45,14 @@ class TextBox extends React.Component {
   }
 }
 
-function MarkdownBox() {
+class MarkdownBox extends React.Component {
+  render(){
   return (
     <div className="col-xs-12 col-sm-6">
-      <h1>Hello World!</h1>
+      <div key={new Date().getTime()} dangerouslySetInnerHTML={{__html: marked(this.props.output)}} />
     </div>
   )
+}
 }
 
 ReactDOM.render(

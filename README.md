@@ -1,3 +1,3 @@
 # markdown-preview
 
-View your markdown in real time. A freeCodeCamp project.
+View your Markdown in real time. A freeCodeCamp project.
